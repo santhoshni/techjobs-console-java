@@ -7,9 +7,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -72,21 +70,51 @@ public class JobData {
 
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
+
         for (HashMap<String, String> row : allJobs) {
-
+           // System.out.println("column elem = " + aValue);
             String aValue = row.get(column);
-
-            if (aValue.contains(value)) {
+            System.out.println("aValue elem = " + aValue);
+            if (aValue.toLowerCase().contains(value.toLowerCase())){
                 jobs.add(row);
             }
         }
 
         return jobs;
     }
+    // Santhoshni Method for findByValue
+    //public static ArrayList<HashMap<String, String>>findByValue(String value){
+    public static ArrayList<HashMap<String, String>> findByValue(String searchTermValue){
+        // load data, if not already loaded
+        loadData();
 
-    /**
-     * Read in data from a CSV file and store it in a list
-     */
+        ArrayList<String> values = new ArrayList<>();
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+        for (HashMap<String, String> row : allJobs) {
+
+            //System.out.println(row.values());
+            Collection<String> Geeksvalues = row.values();
+            //System.out.println("Initial values : " + Geeksvalues.contains(searchTermValue));
+
+            for (String elem :Geeksvalues) {
+                System.out.println("elem = " + elem);
+                if (elem.toLowerCase().contains(searchTermValue.toLowerCase())){
+                    jobs.add(row);
+                    break;
+                }
+            }
+//            if (row.containsValue(searchTermValue)) {
+//                jobs.add(row);
+//           }
+        }
+
+        return jobs;
+    }
+
+        /**
+         * Read in data from a CSV file and store it in a list
+         */
     private static void loadData() {
 
         // Only load data once
