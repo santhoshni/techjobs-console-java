@@ -74,7 +74,7 @@ public class JobData {
         for (HashMap<String, String> row : allJobs) {
            // System.out.println("column elem = " + aValue);
             String aValue = row.get(column);
-            System.out.println("aValue elem = " + aValue);
+            //System.out.println("aValue elem = " + aValue);
             if (aValue.toLowerCase().contains(value.toLowerCase())){
                 jobs.add(row);
             }
@@ -88,27 +88,17 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
-        ArrayList<String> values = new ArrayList<>();
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
 
-            //System.out.println(row.values());
-            Collection<String> Geeksvalues = row.values();
-            //System.out.println("Initial values : " + Geeksvalues.contains(searchTermValue));
-
-            for (String elem :Geeksvalues) {
-                System.out.println("elem = " + elem);
+            for (String elem :row.values()) {
                 if (elem.toLowerCase().contains(searchTermValue.toLowerCase())){
                     jobs.add(row);
                     break;
                 }
             }
-//            if (row.containsValue(searchTermValue)) {
-//                jobs.add(row);
-//           }
         }
-
         return jobs;
     }
 
